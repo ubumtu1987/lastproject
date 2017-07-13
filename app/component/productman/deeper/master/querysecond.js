@@ -9,6 +9,7 @@ var Search = React.createClass({
   // Also note the "resuls" state. This will be where we hold the data from our results
   getInitialState: function() {
     return {
+
       results: {}
     };
   },
@@ -77,9 +78,13 @@ var Search = React.createClass({
       if(data.length == 0){
       console.log("empty");
       }else{
-      this.setState({results : { docs : data}}); 
+      this.setState({results : { check : "hi",
+                                 docs : data}}); 
+      //this.setState({results : { check : "hi"}}); 
+
+      
       }
-      //console.log(this.state.results.docs);
+      console.log(this.state.results.docs);
 
   },
   /*
@@ -111,7 +116,7 @@ var Search = React.createClass({
     );
   }, 
    render: function() {
-    
+     console.log(this.state.results.check);
     // If we have no articles, render this HTML
     if (!this.state.results.check) {
       return (
