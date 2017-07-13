@@ -47,6 +47,13 @@ var Search = React.createClass({
       socket.on('change:name', this._userChangedName);
   },
   */
+  handlelog : function(data){
+
+
+     window.location.href = '/#/Main';
+
+
+   }, 
   
   // Render the component. Note how we deploy both the Query and the Results Components
   render: function() {
@@ -56,6 +63,9 @@ var Search = React.createClass({
         {/*
         Productshow results={this.state.results}
         */}
+        <div>
+        <button className="btn btn-primary" onClick={() => this.handlelog()}>Main</button>
+        </div> 
         <div> 
         Product List!!!
         </div>
