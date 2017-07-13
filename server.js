@@ -44,7 +44,7 @@ app.use("/login", authRoutes);
 //app.use("/api", apiRoutes);
 
 // MongoDB configuration (Change this URL to your own DB)
-mongoose.connect("mongodb://localhost/e-shop");
+mongoose.connect( process.env.MONGODB_URI || "mongodb://heroku_ck9nshsq:jt2ch0qdob8gv879hgboqa08t1@ds157682.mlab.com:57682/heroku_ck9nshsq");
 var db = mongoose.connection;
 
 db.on("error", function(err) {
