@@ -1,5 +1,6 @@
  product = require("./models/products.js");
- userlist = require("./models/users.js"); 
+ userlist = require("./models/users.js");
+ cartlist = require("./models/carts.js"); 
 
 module.exports = function(socket) {
   
@@ -9,6 +10,59 @@ module.exports = function(socket) {
             socket.emit('returnso', 'Hello World from client');
             //console.log('from console',message.value);
         });
+
+
+
+
+        socket.on('deletecartman', function(item) {
+           console.log("end function");
+           console.log(item);
+            cartlist.remove({"_id" : item._id}, function(err, doc) {
+                 
+                   if(err){
+                       console.log(err);
+                   }
+                   else{
+                     console.log( "success");
+                     socket.emit("recartman" , 'end'); 
+                           
+                     
+                       
+                   }
+                 
+             });
+
+
+          
+        });
+
+        socket.on('finducart', function(message) {
+             // console.log("last cart");
+              //console.log(message);
+              cartlist.find({"user" : message}, function(err, doc) {
+            // log any errors
+                 if (err) {
+                   console.log(err);
+                  }
+                 // or send the doc to the browser as a json object
+                 else {
+                   
+                 //console.log("chekc point")
+                 console.log(doc);
+                socket.emit('returcartinfo', doc);
+                
+                }
+              });
+
+
+         }); 
+        
+
+
+
+
+
+
 
          socket.on('deletething', function(message) {
               socket.broadcast.emit('getrid', message);
