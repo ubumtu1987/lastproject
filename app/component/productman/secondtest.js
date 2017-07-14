@@ -25,7 +25,14 @@ var Search = React.createClass({
   change: function() {
       window.location.href = '/#/controlp'; 
   },
+   handlelog : function(){
 
+
+     window.location.href = '/#/Main';
+
+
+   }, 
+  
 
   /*
   componentDidMount : function  {
@@ -45,6 +52,9 @@ var Search = React.createClass({
         {/*
         Productshow results={this.state.results}
         */}
+        <div>
+        <button className="btn btn-primary" onClick={() => this.handlelog()}>Main</button>
+        </div>
         <div> 
         MasterSesscion!!!
         </div>

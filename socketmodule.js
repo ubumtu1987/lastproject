@@ -10,6 +10,32 @@ module.exports = function(socket) {
             //console.log('from console',message.value);
         });
 
+         socket.on('deletething', function(message) {
+              socket.broadcast.emit('getrid', message);
+
+
+         }); 
+        
+         
+         socket.on('changelist', function(message) {
+            socket.broadcast.emit('reachfinal', message);
+
+
+         }); 
+
+         socket.on('starter', function(message) {
+            console.log(message);
+            socket.broadcast.emit('deliverdata');
+
+
+         }); 
+        
+         socket.on('takedel', function(message) {
+          console.log(message); 
+          socket.broadcast.emit("gofinal", message);
+
+
+         }); 
 
 
          socket.on('sendclinet', function(message) {

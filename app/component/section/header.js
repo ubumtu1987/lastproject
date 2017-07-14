@@ -101,7 +101,7 @@ var Header = React.createClass({
 
          <SubMenu title={<span><Icon type="setting" key="Main" />Products</span>}>
           
-            <Menu.Item key="Product"><a href="#/Product">View All Products</a></Menu.Item>
+            <Menu.Item key="Product"><a href="#/product">View All Products</a></Menu.Item>
             
         </SubMenu>
 
@@ -111,7 +111,7 @@ var Header = React.createClass({
         <SubMenu title={<span className="log"><Icon type="Contact" key="Main"/><a href="#/Contact">Contact Us</a></span>}>
               
         </SubMenu>
-        <SubMenu title={<span className="log"><Icon type="Cart" key="Main"/><a href="#/Cart">Cart</a></span>}>
+        <SubMenu title={<span className="log"><Icon type="Cart" key="Main"/><a href="#/Carts">Cart</a></span>}>
               
         </SubMenu>
        
@@ -142,7 +142,7 @@ var Header = React.createClass({
 
          <SubMenu title={<span><Icon type="setting" key="Main" />Products</span>}>
           
-            <Menu.Item key="Product"><a href="#/Product">View All Products</a></Menu.Item>
+            <Menu.Item key="Product"><a href="#/Allproduct">View All Products</a></Menu.Item>
             
         </SubMenu>
         <SubMenu title={<span className="log"><Icon type="login" key="Main"/><a href="/login">Manage</a></span>}>

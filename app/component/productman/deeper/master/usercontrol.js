@@ -107,6 +107,12 @@ var Results = React.createClass({
    
     
   },
+  handlelogout : function (){
+    window.location.href = '/#/Main'
+
+
+  },
+
   // A helper method for mapping through our articles and outputting some HTML
   renderArticles: function() {
     return this.state.doc.data.map(function(user, index) {
@@ -138,9 +144,11 @@ var Results = React.createClass({
      <div className="main-container">
         <div className="row">
           <div className="col-lg-12">
+            <button className="btn btn-primary" onClick={() => this.handlelogout()}>Main</button>
+            <button  id="variation"  onClick= {() => {this.modify()}}>product</button>   
             <div className="panel panel-primary">
               <div className="panel-heading">
-                <button  id="variation"  onClick= {() => {this.modify()}}>product</button>   
+               
                 <h1 className="panel-title">
                   <strong>
                     <i className="fa fa-list-alt"></i>

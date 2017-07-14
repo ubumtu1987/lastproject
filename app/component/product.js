@@ -1,83 +1,105 @@
 import React from "react";
-import Header from "./section/header.js";
-import Footer from "./section/footer.js";
 import helpers from "./utils/helpers.js";
 import { InputNumber } from 'antd';
+import { Row, Col } from 'antd';
 
 
-
-var Product = React.createClass({
-
- onChange: function(value) {
-  console.log('changed', value);
+class Product extends React.Component {
+  
+ constructor(props) {
+    super(props);
+    this.state = {
+      orders:"3",
+      user:"user1",
+      checkout:"pending",
+      indexes : []
+    };
+    this.onChange = this.onChange.bind(this);
+    this.AddToCart = this.AddToCart.bind(this);
   }
-  ,
-	getInitialState: function() {
-    return { selectedItem:[], products: [] };
-  },
-  intialzie : function(data){
 
-    if(data.length == 0){
-      console.log("empty");
-      }else{
-      this.setState({products : data}); 
-      console.log(this.state.products);
-     }
+onChange(value) {
+  console.log('changed', value);
+  var newState = value;
+  this.setState({orders: newState});
 
-  } 
-  , 
-	componentDidMount: function() {
-    // Get the latest history.
-    var socketsMan = io.connect(); 
-    socketsMan.emit('getProduct');
-    socketsMan.on('takeProduct', this.intialzie );
-  },
+  }
 
-render: function() {
+AddToCart()
+  {
+    var newIndexes = this.state.indexes;
+    console.log("teeeessssssssst");
 
-    var indents = [];
-    for (var i = 0; i < this.state.products.length; i++) {
-      indents.push(
-            <div className="product-section1-box" key={i}>   
+    if(this.state.indexes.indexOf(this.props.details._id)== -1)
+     {
+         var indesOfproduct = this.props.details._id;
+         helpers.saveCart({ 
+         orders: this.state.orders,
+         user: this.state.user,
+         price: this.props.details.Price,
+         product: (this.props.details.Name),
+          })
 
-                       <a href="#" className="product-section1-card" target="_blank">
+           .then(function() {
+              console.log("Posted to MongoDB");
+              
+              
+                           });
+          newIndexes.push(this.props.details._id);
+          this.setState({indexes:newIndexes}); 
+      }
 
-                           <div className="product-section1-cardbac1">
-                             <img src={this.state.products[i].Image} className="productimg" />
+      else
+      {
+        helpers.updateCart(this.props.details.Name,{
+          orders: this.state.orders,
+        }).then(function() {
+              console.log("Edited to MongoDB");
+            });
+      }
+
+}
+
+
+render()
+{
+  console.log("Hellooooooooooo" + this.state.orders);
+
+  let details = this.props.details;
+  return(
+
+      <div>
+
+            
+          <Col span={8}>
+                      <div className="produt-container">
+                           <div>
+                             <img src={details.Image} className="productimg" />
                            </div>
 
                            <div>
-                                   <h2>Product Name:{this.state.products[i].Name}</h2>
-                                   <div>Desc:{this.state.products[i].Desc}</div>
-                                   <div>Price:{this.state.products[i].Price}</div>
+                                   <h3><b>Product Name:{details.Name}</b></h3>
+                                   <div>Desc:{details.Desc}</div>
+                                   <div><b>Price:${details.Price}</b></div>
                                    <div>Quantity
-                                    <InputNumber min={1} max={10} defaultValue={1} onChange={this.onChange} />
+
+                                    <InputNumber min={1} max={50} defaultValue={3} onChange={this.onChange} />
+                                    <button type="button" className="productButton" onClick={this.AddToCart} >Add to cart</button>
+
                                    </div>
-                                   <button>Add to cart</button>
+                                   
                            </div>
-                       </a>
-                       
-                   </div>        );
-     }  
-    return (
+                       </div>   
 
-      <div className="product-section1">
-              <Header SelectedMenu="Products"/>
-              <h1> Products </h1>
+        </Col>     
+
+          </div>
+              
 
 
-              {indents}
-                
-                   
-               
-             
-            <Footer/>
 
-	       </div>
+  );
+  } 
+}
 
-		     );
- 
-    }
-
-});
-module.exports = Product;
+export default Product;

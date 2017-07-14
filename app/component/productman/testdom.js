@@ -86,13 +86,23 @@ var Results = React.createClass({
 
 
 
-  },	
+  },
+  handlelog : function(){
+
+    window.location.href = '/#/Main';
+
+
+
+  },
+
  
   renderContainer: function() {
   	  return(
 
           <div> 
+          <div>
           
+          </div>
           <Showproduct/>
 
           </div>

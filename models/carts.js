@@ -5,18 +5,23 @@ var Schema = mongoose.Schema;
 
 // Create a Schema for Cart.
 var CartSchema = new Schema({
-  total: {
+  orders: {
     type: String,
     require: true
   },
-  user: [{
-    type: Schema.Types.ObjectId,
-    ref: "Users"
-  }],
-  product: [{
-    type: Schema.Types.ObjectId,
-    ref: "Products"
-  }],
+  price:
+  {
+    type:String,
+    require:true
+  },
+  user: {
+    type: String,
+    require: true
+  },
+  product: {
+    type: String,
+    require: true
+  }
 });
 
 var Carts = mongoose.model("Carts", CartSchema);
