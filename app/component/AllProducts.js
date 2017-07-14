@@ -14,40 +14,15 @@ class AllProducts extends React.Component {
     super(props);
 
     this.state = {
-      products:[]
+      products:[],
+      user : ""
     };
-    this.componentWillMount = this.componentWillMount.bind(this);
+    
 
     this.componentDidMount = this.componentDidMount.bind(this);
     this.renderRow = this.renderRow.bind(this);
   }
-  componentWillMount() {
-       axios.patch("/login/getcookie").then((response) => {
-        console.log(response.data);
-        let val = response.data+"";
-        console.log(val);
-          if(val == "true"){
-              var sent = {
-                cookie : document.cookie
-              }
-               axios.post("/login/ttcookie", sent).then((response) => {
-
-
-
-
-               }); 
-
-
-
-          }
-
-        
-      });   
-
-
  
- 
-  } 
   componentDidMount() {
     // Get the latest history.
     helpers.getProducts().then(function(response) {
@@ -66,7 +41,8 @@ renderRow(key){
 
  return(
    
-    <Product details={this.state.products[key]} /> 
+    <Product details={this.state.products[key]}
+             user = {this.state.user} /> 
 
   );
 }
