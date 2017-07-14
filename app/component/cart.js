@@ -1,6 +1,9 @@
 // Include React as a dependency
 import axios from "axios";
 
+import Header from "./section/header.js";
+import Footer from "./section/footer.js";
+
 var React = require("react");
 var Search = React.createClass({
   // Here we set the initial state variables
@@ -8,23 +11,43 @@ var Search = React.createClass({
   // Also note the "resuls" state. This will be where we hold the data from our results
   getInitialState: function() {
     return {
-      results: ""
+      results: {}
     };
   },  
     
  
   // Render the component. Note how we deploy both the Query and the Results Components
   render: function() {
-     return(
+     if(!this.state.results.doc){     
+      return(
         <div>
-        do it!
+        No cart 
         </div>
 
 
 
       );
-    //console.log("Render Results", this.state.results);
-            //if(typeof(this.state.results.cart) == 'undefined'){ 
+     }else{
+
+           <div className="product-section1">
+                          <Header SelectedMenu="Products"/>
+                          <h1> Products </h1>
+
+                          <div>
+                          {this.renderCon()}
+                          </div>  
+                               
+                           
+                         
+                        <Footer/>
+
+          </div>
+
+
+
+
+
+     }
             
 
   }
