@@ -3,6 +3,7 @@ import Header from "./section/header.js";
 import Footer from "./section/footer.js";
 import helpers from "./utils/helpers.js";
 import { InputNumber } from 'antd';
+import { Row, Col } from 'antd';
 
 
 
@@ -12,7 +13,7 @@ var Product = React.createClass({
   console.log('changed', value);
   }
   ,
-	getInitialState: function() {
+  getInitialState: function() {
     return { selectedItem :"" };
   },
   intialzie : function(data){
@@ -26,7 +27,7 @@ var Product = React.createClass({
 
   } 
   , 
-	componentDidMount: function() {
+  componentDidMount: function() {
     // Get the latest history.
     var socketsMan = io.connect(); 
     socketsMan.emit('getProduct');
@@ -102,25 +103,27 @@ var Product = React.createClass({
        }
       // Each article thus reperesents a list group item with a known index
       return (
-        <div className="product-section1-box" key={index}>   
+        <div key={index}>   
 
-                       <div className="product-section1-card" target="_blank">
+                  <Col span={8}>
+                       <div target="_blank">
 
-                           <div className="product-section1-cardbac1">
+                           <div>
                              <img src={product.Image} className="productimg" />
                            </div>
 
                            <div>
-                                   <h2>Product Name:{product.Name}</h2>
-                                   <div>Desc:{product.Desc}</div>
-                                   <div>Price:{product.Price}</div>
+                                   <h3>{product.Name}</h3>
+                                   <div>{product.Desc}</div>
+                                   <h4><b>Price:{product.Price}</b></h4>
                                    <div>Quantity
                                     <InputNumber min={1} max={10} defaultValue={1} onChange={this.onChange} />
                                    </div>
 
-                          <button type="button" className="productb" onClick={() => {this.todothis(putproduct)}}> Add to cart</button>
+                           <button type="button" className="productb" onClick={() => {this.todothis(putproduct)}}> Add to cart</button>
                            </div>
                        </div>
+                   </Col>    
                        
         </div>    
       );
@@ -173,9 +176,9 @@ render: function() {
                          
                         <Footer/>
 
-            	       </div>
+                     </div>
 
-            		 );
+                 );
               }  
  
     }
